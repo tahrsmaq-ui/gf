@@ -3,23 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعيونك</title>
+    <title>إلى فاطمة... ❤️</title>
     <style>
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
-            background-color: #030303;
-            overflow: hidden;
+            padding: 0;
+        }
+
+        body {
+            background-color: #030305;
+            color: #ffffff;
+            font-family: 'Tahoma', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            font-family: 'Tahoma', sans-serif;
         }
 
-        .heart-container {
+        /* حاوية الخلفية والنجوم المتحركة */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at center, #1a0013 0%, #030305 100%);
+        }
+
+        .star {
+            position: absolute;
+            background: #ff758c;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* حاوية الشاشات السينمائية */
+        .container {
             position: relative;
-            width: 500px;
+            z-index: 10;
+            width: 90%;
+            max-width: 750px;
+            margin: 40px auto;
+        }
+
+        .card {
+            display: none;
+            background: rgba(15, 15, 20, 0.85);
+            border: 1px solid rgba(255, 42, 95, 0.3);
+            border-radius: 25px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(255, 42, 95, 0.2);
+            backdrop-filter: blur(15px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .card.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        h1 {
+            color: #ff2a5f;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 42, 95, 0.6);
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 2;
+            color: #e0e0e0;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .romantic-text {
+            max-height: 380px;
+            overflow-y: auto;
+            padding-left: 10px;
+        }
+
+        /* تخصيص شريط التمرير */
+        .romantic-text::-webkit-scrollbar {
+            width: 5px;
+        }
+        .romantic-text::-webkit-scrollbar-thumb {
+            background: #ff2a5f;
+            border-radius: 10px;
+        }
+
+        /* أزرار تفاعلية */
+        .btn {
+            background: linear-gradient(45deg, #ff2a5f, #ff758c);
+            color: #ffffff;
+            border: none;
+            padding: 12px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 42, 95, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 30px rgba(255, 42, 95, 0.8);
+        }
+
+        /* عداد الأيام */
+        .counter-box {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .time-unit {
+            background: rgba(255, 42, 95, 0.1);
+            border: 1px solid rgba(255, 42, 95, 0.4);
+            padding: 15px;
+            border-radius: 15px;
+            min-width: 80px;
+        }
+
+        .time-unit span {
+            display: block;
+            color: #ff2a5f;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .time-unit label {
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        /* زر الصوت الموسيقي العائم */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 42, 95, 0.2);
+            border: 1px solid #ff2a5f;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(255, 42, 95, 0.4);
+        }
+
+        /* واجهة القلب الأسطوري الأخيرة */
+        .heart-card-container {
+            width: 100%;
             height: 500px;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -50,13 +207,6 @@
             animation: fallAndAssemble 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .love-word:hover {
-            transform: scale(1.5) rotate(0deg) !important;
-            color: #ff758c;
-            z-index: 10;
-            text-shadow: 0 0 15px #ff758c;
-        }
-
         .center-text {
             position: absolute;
             color: #ffffff;
@@ -67,7 +217,10 @@
             z-index: 5;
             pointer-events: none;
             opacity: 0;
-            animation: popIn 1s ease 1.4s forwards;
+        }
+
+        .center-text.show {
+            animation: popIn 1s ease forwards;
         }
 
         @keyframes popIn {
@@ -76,85 +229,190 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        .replay-btn {
-            position: fixed;
-            bottom: 30px;
-            background: rgba(255, 42, 95, 0.15);
-            color: #ff2a5f;
-            border: 1px solid #ff2a5f;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 0 10px rgba(255, 42, 95, 0.3);
-            z-index: 100;
-        }
-
-        .replay-btn:hover {
-            background: #ff2a5f;
-            color: #fff;
-            box-shadow: 0 0 20px #ff2a5f;
+        .final-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
 
-    <div class="heart-container" id="heartContainer">
-        <div class="center-text">أنا بحبك ❤️</div>
+    <!-- خلفية النجوم المتحركة -->
+    <div class="stars-bg" id="starsBg"></div>
+
+    <!-- زر تشغيل الموسيقى الرومانسية -->
+    <button class="music-control" onclick="toggleMusic()">
+        🎵 <span id="musicText">تشغيل الموسيقى</span>
+    </button>
+
+    <!-- عنصر الصوت (موسيقى هادئة ورومانسية) -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=romantic-guitars-112134.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+
+        <!-- الكارت الأول: الترحيب والبداية -->
+        <div class="card active" id="step1">
+            <h1>إلى فاطمة... ❤️</h1>
+            <p style="text-align: center; font-size: 18px;">هناك أشخاص يدخلون حياتنا صدفة، ليصبحوا هم الحياة بأكملها.<br>جهّزت لكِ هذه الرحلة الصغيرة من قلبي...</p>
+            <button class="btn" onclick="nextStep(2)">اضغطي هنا لنبدأ ✨</button>
+        </div>
+
+        <!-- الكارت الثاني: العداد وتاريخ اللقاء -->
+        <div class="card" id="step2">
+            <h1>بداية الحكاية ✨</h1>
+            <p style="text-align: center;">منذ ذلك اليوم الجميل في 31/10، وحتى اليوم 3/11، وكل ثانية تمر وأنتِ جزء من تفاصيلي:</p>
+            
+            <div class="counter-box">
+                <div class="time-unit">
+                    <span id="daysCount">--</span>
+                    <label>أيام</label>
+                </div>
+                <div class="time-unit">
+                    <span id="hoursCount">--</span>
+                    <label>ساعات</label>
+                </div>
+                <div class="time-unit">
+                    <span id="minsCount">--</span>
+                    <label>دقائق</label>
+                </div>
+            </div>
+
+            <button class="btn" onclick="nextStep(3)">تابعي القراءة ❤️</button>
+        </div>
+
+        <!-- الكارت الثالث: النص الأدبي العميق الذي كتبه عبود -->
+        <div class="card" id="step3">
+            <h1>رسالة من قلب عبود... 💌</h1>
+            <div class="romantic-text">
+                <p>فاطمة... يا فاطمة، يا أجمل صدفة خبّأتها إلي الحياة، يا حكاية بلّشت من وقت قصير، بس قدرت تعمل بقلبي شي ما قدرت تعمله سنين طويلة... بتعرفي شو أغرب شي بالدنيا؟ إنو الإنسان ممكن يعيش أيام وشهور وسنين وهو مفكّر إنو قلبه بيعرف كل شي عن الحب...</p>
+                <p>فاطمة، أنا ما بعرف كيف بدي فسّرلك اللي عم يصير معي، ولا كيف بدي وصّفلك شعور كل ما بحكي معك بحس إنو قلبي عم يكتشف شي جديد، كأنو في باب كان مسكّر جوّاتي من زمان، وإنتِ جيتي وفتحتيه من دون ما تنتبهي...</p>
+                <p>صرتِ الاسم اللي لما يمرّ ببالي بتتغيّر ملامح يومي، وصرتِ الحكي اللي ما بملّ منه، والتفصيل الصغير اللي ممكن يخلّي نهاري أحلى... أنا بحبك يا فاطمة، ومو عم قولها لأنو لحظة حلوة مرقت عليّ، بل لأنو هاد هو الشعور اللي عم يكبر جوّاتي كل يوم.</p>
+                <p>أنا ما بدي كون مجرد شخص بيحكيلك كلام حلو وبيختفي، أنا بدي إذا سمحتلي الأيام قرّب منك أكتر، أعرفك على حقيقتك، بكل تفاصيلك، بفرحك وزعلك... وإذا كان الحب الحقيقي بده وقت حتى يثبت حاله، فأنا مستعد أعطي الوقت حقّه.</p>
+                <p>لهيك رح اختصر كل هالرسالة بكلمتين، رغم إنّي بعرف إنهن أكبر من إنهن ينحكوا بسهولة:<br><strong>أنا بحبك يا فاطمة...</strong> وبتمّنى من قلبي إنو الأيام تعطينا فرصة نكون لبعض حكاية حلوة، صادقة، ودافئة.</p>
+            </div>
+            <br>
+            <button class="btn" onclick="nextStep(4)">المفاجأة الكبرى ❤️</button>
+        </div>
+
+        <!-- الكارت الرابع: القلب الأسطوري النهائي -->
+        <div class="card" id="step4">
+            <div class="heart-card-container" id="heartContainer">
+                <div class="center-text" id="centerText">أنا بحبك يا فاطمة ❤️</div>
+            </div>
+            <div class="final-actions">
+                <button class="btn" onclick="alert('أنتِ أجمل قدر بحياتي يا فاطمة! 💕')">دومي بقربي ❤️</button>
+            </div>
+        </div>
+
     </div>
 
-    <button class="replay-btn" onclick="initHeart()">إعادة العرض</button>
-
     <script>
+        // توليد نجوم الخلفية
+        const starsBg = document.getElementById('starsBg');
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            starsBg.appendChild(star);
+        }
+
+        // تشغيل وإيقاف الموسيقى
+        let isPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const musicText = document.getElementById('musicText');
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicText.innerText = "تشغيل الموسيقى";
+                isPlaying = false;
+            } else {
+                bgMusic.play().catch(() => {});
+                musicText.innerText = "إيقاف الموسيقى";
+                isPlaying = true;
+            }
+        }
+
+        // حساب العداد الزمني من تاريخ 31 أكتوبر
+        function updateCounter() {
+            const startDate = new Date('2026-10-31T00:00:00'); // حسب سياق العام
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / 1000 / 60) % 60);
+
+            document.getElementById('daysCount').innerText = days >= 0 ? days : 0;
+            document.getElementById('hoursCount').innerText = hours >= 0 ? hours : 0;
+            document.getElementById('minsCount').innerText = mins >= 0 ? mins : 0;
+        }
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // التنقل بين الشواهد (Cards)
+        function nextStep(stepNum) {
+            document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
+            document.getElementById(`step${stepNum}`).classList.add('active');
+
+            if (stepNum === 4) {
+                setTimeout(initHeart, 400);
+            }
+        }
+
+        // كلمات الحب للقلب الأسطوري
         const words = [
-            "أنا بحبك", "I Love You", "Te amo", "Je t'aime", "Ich liebe dich", 
-            "Mahal kita", "Seni seviyorum", "Cinta kamu", "Aishiteru", "Kocham cię", 
-            "Ti amo", "Minä rakastan sinua", "Jeg elsker dig", "عشقي", "روحي", "قلبي"
+            "أنا بحبك", "فاطمة", "I Love You", "Te amo", "Je t'aime", 
+            "Ich liebe dich", "Mahal kita", "Seni seviyorum", "عشقي", "روحي", "قلبي", "حياتي"
         ];
 
         function initHeart() {
             const container = document.getElementById('heartContainer');
-            const centerText = container.querySelector('.center-text');
+            const centerText = document.getElementById('centerText');
+            
+            // إزالة أي عناصر قديمة عدا النص المركزي
             container.innerHTML = '';
             container.appendChild(centerText);
 
-            const numPoints = 110; // عدد مدروس ومناسب لعدم التداخل
+            const numPoints = 120;
 
             for (let i = 0; i < numPoints; i++) {
                 const t = Math.PI * 2 * (i / numPoints);
-                
-                // معادلة رسم القلب الهندسية بدقة
                 const x = 16 * Math.pow(Math.sin(t), 3);
                 const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
 
-                // تكبير الحجم قليلاً وتوسيطه تماماً في الحاوية
-                const posX = x * 15; 
-                const posY = y * 15;
+                const posX = x * 14; 
+                const posY = y * 14;
 
                 const span = document.createElement('span');
                 span.className = 'love-word';
                 span.innerText = words[Math.floor(Math.random() * words.length)];
                 
-                // استخدام الـ transform لتعيين الموقع بدقة من المنتصف
                 span.style.left = `calc(50% + ${posX}px)`;
                 span.style.top = `calc(50% + ${posY}px)`;
                 
                 const randomRot = (Math.random() - 0.5) * 25;
                 span.style.setProperty('--rot', `${randomRot}deg`);
                 
-                // إحداثيات عشوائية لبداية السقوط لكل كلمة
                 const randXOffset = (Math.random() - 0.5) * 400;
                 span.style.setProperty('--rand-x', `${randXOffset}px`);
 
-                // تباعد زمني بالتسلسل
                 span.style.animationDelay = `${i * 0.015}s`;
 
                 container.appendChild(span);
             }
-        }
 
-        window.onload = initHeart;
+            setTimeout(() => {
+                centerText.classList.add('show');
+            }, 1800);
+        }
     </script>
 </body>
 </html>
