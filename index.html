@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعيونك</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #050505;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Tahoma', sans-serif;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+        }
+
+        .love-word {
+            position: absolute;
+            color: #ff2a5f;
+            font-size: 14px;
+            font-weight: bold;
+            opacity: 0.85;
+            transition: transform 0.3s ease;
+            text-shadow: 0 0 8px rgba(255, 42, 95, 0.6);
+            white-space: nowrap;
+        }
+
+        .love-word:hover {
+            transform: scale(1.3);
+            color: #ff758c;
+            z-index: 10;
+        }
+
+        .center-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0 0 15px #ff2a5f;
+            z-index: 5;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-container" id="heartContainer">
+        <div class="center-text">أنا بحبك ❤️</div>
+    </div>
+
+    <script>
+        const words = [
+            "أنا بحبك", "I Love You", "Te amo", "Je t'aime", "Ich liebe dich", 
+            "Mahal kita", "Seni seviyorum", "Cinta kamu", "Aishiteru", "Kocham cię", 
+            "Ti amo", "Minä rakastan sinua", "Jeg elsker dig", "حبك", "عشقي", "روحي"
+        ];
+
+        const container = document.getElementById('heartContainer');
+        const numPoints = 120; // عدد الكلمات داخل القلب
+
+        for (let i = 0; i < numPoints; i++) {
+            // معادلة رسم القلب الإحداثية (Parametric equations for a heart)
+            const t = Math.PI * 2 * (i / numPoints);
+            const x = 16 * Math.pow(Math.sin(t), 3);
+            const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+
+            // تحييد وتوسيع الإحداثيات لتناسب الشاشة
+            const posX = x * 12 + 200; 
+            const posY = y * 12 + 180;
+
+            const span = document.createElement('span');
+            span.className = 'love-word';
+            span.innerText = words[Math.floor(Math.random() * words.length)];
+            span.style.left = `${posX}px`;
+            span.style.top = `${posY}px`;
+            
+            // حركة دوران وتأخير عشوائي لإعطاء حيوية
+            span.style.transform = `rotate(${Math.sin(i) * 20}deg)`;
+
+            container.appendChild(span);
+        }
+    </script>
+</body>
+</html>
