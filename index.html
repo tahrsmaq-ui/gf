@@ -119,8 +119,8 @@
             background: linear-gradient(45deg, #ff2a5f, #ff758c);
             color: #ffffff;
             border: none;
-            padding: 12px 35px;
-            font-size: 16px;
+            padding: 14px 40px;
+            font-size: 17px;
             font-weight: bold;
             border-radius: 30px;
             cursor: pointer;
@@ -161,7 +161,7 @@
             color: #ccc;
         }
 
-        /* زر الصوت الموسيقي */
+        /* زر الصوت الإضافي العائم إذا احتجته */
         .music-control {
             position: fixed;
             top: 20px;
@@ -169,15 +169,12 @@
             background: rgba(255, 42, 95, 0.25);
             border: 1px solid #ff2a5f;
             color: #fff;
-            padding: 10px 18px;
+            padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
             z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            box-shadow: 0 0 15px rgba(255, 42, 95, 0.4);
+            font-size: 13px;
+            box-shadow: 0 0 10px rgba(255, 42, 95, 0.3);
         }
 
         /* واجهة القلب الأسطوري الفخمة */
@@ -190,7 +187,6 @@
             align-items: center;
         }
 
-        /* تأثير نبض القلب بعد التشكّل */
         .heart-pulse {
             animation: pulseHeart 1.6s infinite ease-in-out alternate;
         }
@@ -260,7 +256,6 @@
             justify-content: center;
         }
 
-        /* القلوب المتطايرة بالخلفية */
         .floating-heart {
             position: absolute;
             color: #ff2a5f;
@@ -281,28 +276,25 @@
     <!-- خلفية النجوم المتحركة -->
     <div class="stars-bg" id="starsBg"></div>
 
-    <!-- زر تشغيل الموسيقى الرومانسية (Yes I Love You) -->
-    <button class="music-control" onclick="toggleMusic()">
-        🎵 <span id="musicText">تشغيل أغنية الترند ✨</span>
-    </button>
+    <!-- زر تحكم صوتي إضافي بالزاوية -->
+    <button class="music-control" onclick="toggleMusic()">🎵 الموسيقى</button>
 
-    <!-- رابط صوت أغنية الترند الرومانسية (Yes I Love You) -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8b1853d.mp3?filename=yes-i-love-you-romantic-10332.mp3" type="audio/mpeg">
+    <!-- عنصر الصوت لأغنية الترند (Yes I Love You) -->
+    <audio id="bgMusic" loop>
         <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf756.mp3?filename=romantic-guitars-112134.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
 
-        <!-- الكارت الأول: الترحيب والبداية -->
+        <!-- الكارت الأول مع زر البدء السحري -->
         <div class="card active" id="step1">
             <h1>إلى فاطمة... ❤️</h1>
             <p style="text-align: center; font-size: 16px;">هناك أشخاص يدخلون حياتنا صدفة، ليصبحوا هم الحياة بأكملها.<br>جهّزت لكِ هذه الرحلة الصغيرة من قلبي...</p>
-            <br>
-            <button class="btn" onclick="startJourney()">اضغطي هنا لنبدأ ✨</button>
+            <br><br>
+            <button class="btn" onclick="startJourney()">اضغطي هنا للبدء ✨</button>
         </div>
 
-        <!-- الكارت الثاني: العداد وتاريخ اللقاء -->
+        <!-- الكارت الثاني: العداد -->
         <div class="card" id="step2">
             <h1>بداية الحكاية ✨</h1>
             <p style="text-align: center;">منذ ذلك اليوم الجميل في 31/10، وحتى اليوم 3/11، وكل ثانية تمر وأنتِ جزء من تفاصيلي:</p>
@@ -336,26 +328,25 @@
                 <p>يا فاطمة، لو بتعرفي قديش بحب اسمك لما يمرّ على لساني، وقديش بحب فكرة إنو في إنسانة بهالدنيا اسمها فاطمة قدرت تخلّيني اكتب كل هالحكي، يمكن كنتِ فهمتي ليش عم حاول لاقي كلمات أكبر من مشاعري، وليش كل ما بدي عبّرلك عن اللي بقلبي بحس إنو الحروف عم تضيق عليّ، وإنو كلمة بحبك، على جمالها، ما عم تكفّيني لأشرحلك شو مكانك عم يصير عندي.</p>
                 <p><strong>أنا بحبك يا فاطمة...</strong> إي، بحبك، ومو عم قولها لأنو لحظة حلوة مرقت عليّ، ولا لأنو الحماس خلّاني احكي كلام أكبر مني، ولا لأنو بدي قولك شي حلو حتى اترك بقلبك انطباع جميل. أنا عم قولها لأنو هاد هو الشعور اللي عم يكبر جوّاتي، ولأنو صار صعب عليّ ضلّ عامل حالي إنو كل شي عادي، بينما وجودك بالنسبة إلي مو عادي أبداً.</p>
                 <p>أنا ما بدي كون مجرد شخص بيحكيلك كلام حلو وبيختفي، ولا بدي كون حكاية بتبلّش بكم كلمة رومانسية وبتنتهي أول ما تخفّ الحماسة. أنا بدي إذا سمحتلي الأيام قرّب منك أكتر، أعرفك على حقيقتك، بكل تفاصيلك، بفرحك وزعلك، بقوتك وضعفك... وإذا كان الحب الحقيقي بده وقت حتى يثبت حاله، فأنا مستعد أعطي الوقت حقّه، وأخلي الأيام تعرّفك عليّ مثل ما أنا عم حاول أعرفك.</p>
-                <p>يا فاطمة، أنا ما بعرف شو مخبّيلنا المستقبل، ولا بدي استعجل الأيام وأطلب منها تعطيني كل شي من أول الطريق، بس بعرف إنو مشاعري تجاهك صادقة، وبعرف إنو وجودك صار يعنيلي، وبعرف إنو في شي حلو عم ينمو بقلبي كل ما عرفتك أكتر. وإذا اختارت مشاعرك يوم تكون قريبة من مشاعري، نكتب سوا حكاية ما بتحتاج كل يوم كلام كبير حتى تثبت جمالها، لأنو جمالها رح يكون بتفاصيلها الصغيرة، باهتمامنا ببعض، وبالراحة اللي منحس فيها لما نكون على طبيعتنا.</p>
+                <p>يا فاطمة، أنا ما بعرف شو مخبّيلنا المستقبل، ولا بدي استعجل الأيام وأطلب منها تعطيني كل شي من أول الطريق، بس بعرف إنو مشاعري تجاهك صادقة، وبعرف إنو وجودك صار يعنيلي، وبعرف إنو في شي حلو عم ينمو بقلبي كل ما عرفتك أكتر. وإذا اختارت مشاعري يوم تكون قريبة من مشاعري، نكتب سوا حكاية ما بتحتاج كل يوم كلام كبير حتى تثبت جمالها، لأنو جمالها رح يكون بتفاصيلها الصغيرة، باهتمامنا ببعض، وبالراحة اللي منحس فيها لما نكون على طبيعتنا.</p>
                 <p>لهيك رح اختصر كل هالرسالة بكلمتين، رغم إنّي بعرف إنهن أكبر من إنهن ينحكوا بسهولة:<br><strong>أنا بحبك يا فاطمة...</strong> وبتمّنى من قلبي إنو الأيام تعطينا فرصة نكون لبعض حكاية حلوة، صادقة، ودافئة، حكاية كل واحد فينا فيها بيختار التاني مو لأنو مضطر، بل لأنو قلبه مرتاح معه، ولأنو وجوده بحياته صار من الأشياء اللي ما بيتمنّى يخسر جمالها أبداً.</p>
             </div>
             <button class="btn" onclick="nextStep(4)">المفاجأة الكبرى ❤️</button>
         </div>
 
-        <!-- الكارت الرابع: واجهة القلب الأسطورية المحسّنة -->
+        <!-- الكارت الرابع: القلب الأسطوري المضيء -->
         <div class="card" id="step4">
             <div class="heart-card-container" id="heartContainer">
                 <div class="center-text" id="centerText">أنا بحبك يا فاطمة ❤️</div>
             </div>
             <div class="final-actions">
-                <button class="btn" onclick="createHeartsExplosion()">دومي بقربي 💕</button>
+                <button class="btn" onclick="alert('أنتِ أجمل وأحلى شيء صار بحياتي يا فاطمة! 💕✨')">دومي بقربي 💕</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // نجوم الخلفية
         const starsBg = document.getElementById('starsBg');
         for (let i = 0; i < 65; i++) {
             const star = document.createElement('div');
@@ -368,32 +359,25 @@
             starsBg.appendChild(star);
         }
 
-        // التحكم بالموسيقى
-        let isPlaying = false;
         const bgMusic = document.getElementById('bgMusic');
-        const musicText = document.getElementById('musicText');
 
-        function toggleMusic() {
-            if (isPlaying) {
-                bgMusic.pause();
-                musicText.innerText = "تشغيل الموسيقى 🎵";
-                isPlaying = false;
-            } else {
-                bgMusic.play().then(() => {
-                    musicText.innerText = "إيقاف الموسيقى 🎵";
-                    isPlaying = true;
-                }).catch(e => {
-                    alert("اضغط مرة ثانية لتشغيل الموسيقى 😊");
-                });
-            }
-        }
-
+        // تشغيل الموسيقى فور الضغط على زر "اضغطي هنا للبدء"
         function startJourney() {
-            toggleMusic();
+            bgMusic.play().catch(e => console.log("Audio play prevented:", e));
             nextStep(2);
         }
 
-        // العداد الزمني من 31/10
+        let isPlaying = true;
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                isPlaying = true;
+            }
+        }
+
         function updateCounter() {
             const startDate = new Date('2026-10-31T00:00:00');
             const now = new Date();
@@ -410,7 +394,6 @@
         setInterval(updateCounter, 1000);
         updateCounter();
 
-        // التنقل بين الشواهد
         function nextStep(stepNum) {
             document.querySelectorAll('.card').forEach(card => card.classList.remove('active'));
             document.getElementById(`step${stepNum}`).classList.add('active');
@@ -420,7 +403,6 @@
             }
         }
 
-        // كلمات الحب للقلب
         const words = [
             "أنا بحبك", "فاطمة", "I Love You", "Yes I Love You", "Te amo", "Je t'aime", 
             "Ich liebe dich", "Seni seviyorum", "عشقي", "روحي", "قلبي", "حياتي", "يا عيون عبود"
@@ -461,7 +443,6 @@
                 container.appendChild(span);
             }
 
-            // بعد تشكل الكلمات، نضيف نبض القلب والعبارة الجذابة
             setTimeout(() => {
                 container.classList.add('heart-pulse');
                 centerText.classList.add('show');
@@ -469,7 +450,6 @@
             }, 1900);
         }
 
-        // تأثير تطاير القلوب
         function startFloatingHearts() {
             const container = document.getElementById('heartContainer');
             setInterval(() => {
@@ -482,10 +462,6 @@
 
                 setTimeout(() => heart.remove(), 4000);
             }, 600);
-        }
-
-        function createHeartsExplosion() {
-            alert('أنتِ أجمل وأحلى شيء صار بحياتي يا فاطمة! 💕✨');
         }
     </script>
 </body>
