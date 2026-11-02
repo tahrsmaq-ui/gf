@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            background-color: #050505;
+            background-color: #030303;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -22,35 +22,78 @@
             height: 400px;
         }
 
+        @keyframes fallAndAssemble {
+            0% {
+                transform: translateY(-500px) scale(0.2) rotate(45deg);
+                opacity: 0;
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(0) scale(1) rotate(var(--rot));
+                opacity: 0.9;
+            }
+        }
+
         .love-word {
             position: absolute;
             color: #ff2a5f;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
-            opacity: 0.85;
-            transition: transform 0.3s ease;
-            text-shadow: 0 0 8px rgba(255, 42, 95, 0.6);
+            text-shadow: 0 0 10px rgba(255, 42, 95, 0.7);
             white-space: nowrap;
+            opacity: 0;
+            animation: fallAndAssemble 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .love-word:hover {
-            transform: scale(1.3);
+            transform: scale(1.4) rotate(0deg) !important;
             color: #ff758c;
             z-index: 10;
+            text-shadow: 0 0 15px #ff758c;
         }
 
         .center-text {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0);
             color: #ffffff;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             text-align: center;
-            text-shadow: 0 0 15px #ff2a5f;
+            text-shadow: 0 0 20px #ff2a5f, 0 0 10px #ff2a5f;
             z-index: 5;
             pointer-events: none;
+            animation: popIn 1s ease 1.2s forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            80% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        /* زر إعادة العرض */
+        .replay-btn {
+            position: fixed;
+            bottom: 30px;
+            background: rgba(255, 42, 95, 0.15);
+            color: #ff2a5f;
+            border: 1px solid #ff2a5f;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(255, 42, 95, 0.3);
+        }
+
+        .replay-btn:hover {
+            background: #ff2a5f;
+            color: #fff;
+            box-shadow: 0 0 20px #ff2a5f;
         }
     </style>
 </head>
@@ -60,37 +103,52 @@
         <div class="center-text">أنا بحبك ❤️</div>
     </div>
 
+    <button class="replay-btn" onclick="initHeart()">إعادة العرض</button>
+
     <script>
         const words = [
             "أنا بحبك", "I Love You", "Te amo", "Je t'aime", "Ich liebe dich", 
             "Mahal kita", "Seni seviyorum", "Cinta kamu", "Aishiteru", "Kocham cię", 
-            "Ti amo", "Minä rakastan sinua", "Jeg elsker dig", "حبك", "عشقي", "روحي"
+            "Ti amo", "Minä rakastan sinua", "Jeg elsker dig", "عشقي", "روحي", "قلبي"
         ];
 
-        const container = document.getElementById('heartContainer');
-        const numPoints = 120; // عدد الكلمات داخل القلب
+        function initHeart() {
+            const container = document.getElementById('heartContainer');
+            // الحفاظ على النص الموجود في المنتصف وإزالة الكلمات القديمة فقط
+            const centerText = container.querySelector('.center-text');
+            container.innerHTML = '';
+            container.appendChild(centerText);
 
-        for (let i = 0; i < numPoints; i++) {
-            // معادلة رسم القلب الإحداثية (Parametric equations for a heart)
-            const t = Math.PI * 2 * (i / numPoints);
-            const x = 16 * Math.pow(Math.sin(t), 3);
-            const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+            const numPoints = 130; // عدد الكلمات لتشكيل القلب
 
-            // تحييد وتوسيع الإحداثيات لتناسب الشاشة
-            const posX = x * 12 + 200; 
-            const posY = y * 12 + 180;
+            for (let i = 0; i < numPoints; i++) {
+                const t = Math.PI * 2 * (i / numPoints);
+                // معادلة رسم القلب الهندسية
+                const x = 16 * Math.pow(Math.sin(t), 3);
+                const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
 
-            const span = document.createElement('span');
-            span.className = 'love-word';
-            span.innerText = words[Math.floor(Math.random() * words.length)];
-            span.style.left = `${posX}px`;
-            span.style.top = `${posY}px`;
-            
-            // حركة دوران وتأخير عشوائي لإعطاء حيوية
-            span.style.transform = `rotate(${Math.sin(i) * 20}deg)`;
+                // ضبط الإحداثيات لتتمركز بمنتصف الحاوية
+                const posX = x * 12 + 200; 
+                const posY = y * 12 + 180;
 
-            container.appendChild(span);
+                const span = document.createElement('span');
+                span.className = 'love-word';
+                span.innerText = words[Math.floor(Math.random() * words.length)];
+                span.style.left = `${posX}px`;
+                span.style.top = `${posY}px`;
+                
+                const randomRot = (Math.random() - 0.5) * 30;
+                span.style.setProperty('--rot', `${randomRot}deg`);
+                
+                // تأخير زمني عشوائي لكل كلمة لتنزل بشكل متسلسل ومبهر
+                span.style.animationDelay = `${Math.random() * 1.2}s`;
+
+                container.appendChild(span);
+            }
         }
+
+        // تشغيل الحركة عند فتح الصفحة
+        window.onload = initHeart;
     </script>
 </body>
 </html>
